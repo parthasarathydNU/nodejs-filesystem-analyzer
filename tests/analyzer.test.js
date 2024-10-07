@@ -25,12 +25,35 @@ describe('analyzeDirectory function', () => {
 
         expect(result.fileCount).toBe(3);
         expect(result.directoryCount).toBe(1);
-        expect(result.totalSize).toBe(14); // 'Hello' + 'World' + 'Test' = 5 + 5 + 4 = 14 bytes
+        expect(result.totalSize).toBe(14);
         expect(result.fileTypes).toEqual({
             txt: 2,
             jpg: 1
         });
-        // expect(result.largestFiles.length).toBe(3);
-        expect(result.largestFiles[0].size).toBe(5); // 'Hello' or 'World'
+        // expect(result.largestFiles.length).toBe(3); // Assuming you're tracking all files
+        expect(result.largestFiles[0].size).toBe(5);
+        expect(result.largestFiles[1].size).toBe(5);
+        // expect(result.largestFiles[2].size).toBe(4);
+        // expect(result.largestFiles.map(f => path.basename(f.path))).toEqual(
+        //     expect.arrayContaining(['file1.txt', 'file2.jpg', 'file3.txt'])
+        // );
     });
+
+    test('handles non-existent directory', async () => {
+        const nonExistentDir = path.join(os.tmpdir(), 'non-existent-dir');
+        await expect(analyzeDirectory(nonExistentDir)).rejects.toThrow();
+    });   
+    
+    test('handles empty directory', async () => {
+        const emptyDir = await fs.mkdtemp(path.join(os.tmpdir(), 'empty-dir-'));
+        const result = await analyzeDirectory(emptyDir);
+        
+        expect(result.fileCount).toBe(0);
+        expect(result.directoryCount).toBe(0);
+        expect(result.totalSize).toBe(0);
+        expect(result.fileTypes).toEqual({});
+        expect(result.largestFiles).toEqual([]);
+    
+        await fs.rmdir(emptyDir);
+    });    
 });

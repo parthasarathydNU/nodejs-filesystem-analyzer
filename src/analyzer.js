@@ -19,6 +19,12 @@ async function analyzeDirectory(dirPath){
 
     try{
 
+        const isPathDirectory = await isDirectory(dirPath);
+
+        if(!isPathDirectory){
+            throw new Error(`"Given path is not a directory ${dirPath}`);
+        }
+
         const items = await fs.readdir(dirPath);
 
         await Promise.all(items.map(async (item) => {
@@ -55,7 +61,8 @@ async function analyzeDirectory(dirPath){
 
 
     } catch(error) {
-        console.error(`Error in analyzeDirectory try/catch ${error}`)
+        console.error(`Error in analyzeDirectory try/catch ${error}`);
+        throw Error(error);
     }
 
     return result;
