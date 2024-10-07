@@ -4,7 +4,7 @@
   "description": "The File System Analyzer is a command-line tool built with Node.js that provides detailed analysis of a directory structure. It leverages core Node.js modules to scan directories, analyze files, and generate comprehensive reports.",
   "main": "index.js",
   "scripts": {
-    "test": "jest fileUtil"
+    "test": "jest"
   },
   "author": "Dhruv Parth",
   "license": "ISC",

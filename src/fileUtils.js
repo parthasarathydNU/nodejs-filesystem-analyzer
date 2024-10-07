@@ -31,8 +31,9 @@ function calculateHash(filePath){
 
 
 /**
- * This is an async function that takes in a path and returns true if it is a directory
+ * This is an async function that takes in a path and returns true if it is a directory else false
  * @param {String} path 
+ * @return Boolean
  */
 async function isDirectory(path) {
 
