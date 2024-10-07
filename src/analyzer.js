@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const {isDirectory, getFileInfo} = require('./fileUtils');
+const AnalyzerEmitter = require('./analyzerEmitter');
 
 
 /**
@@ -8,7 +9,7 @@ const {isDirectory, getFileInfo} = require('./fileUtils');
  * the inbuilt methods in the fileUtils file
  * @param {String} dirPath 
  */
-async function analyzeDirectory(dirPath){
+async function analyzeDirectory(dirPath, emitter = new AnalyzerEmitter()){
     const result = {
         totalSize: 0,
         fileCount: 0,
@@ -26,6 +27,7 @@ async function analyzeDirectory(dirPath){
         }
 
         const items = await fs.readdir(dirPath);
+        emitter.setTotalItems(emitter.totalItems + items.length);
 
         await Promise.all(items.map(async (item) => {
 
@@ -56,6 +58,8 @@ async function analyzeDirectory(dirPath){
                 updateLargestFiles(result.largestFiles, { path: itemPath, size: fileInfo.size });
 
             }
+
+            emitter.itemProcessed();
 
         }));
 
@@ -98,4 +102,4 @@ function updateLargestFiles(largestFiles, newFile, maxFiles = 10) {
     
 }
 
-module.exports = { analyzeDirectory };
+module.exports = { analyzeDirectory, AnalyzerEmitter };
