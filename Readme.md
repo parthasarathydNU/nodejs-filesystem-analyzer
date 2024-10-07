@@ -10,6 +10,39 @@ The File System Analyzer is a command-line tool built with Node.js that provides
 4. Apply event-driven programming concepts
 5. Create a practical, extensible CLI tool
 
+Certainly! Here's a setup section you can add to your README.md file. This section provides clear instructions for setting up the File System Analyzer project:
+
+### Setup
+
+Follow these steps to set up the File System Analyzer project on your local machine:
+
+1. **Clone the repository**
+   ```
+   git clone https://github.com/parthasarathydNU/nodejs-filesystem-analyzer.git
+   cd file-system-analyzer
+   ```
+
+2. **Install dependencies**
+   Make sure you have Node.js installed (version 14.x or later), then run:
+   ```
+   npm install
+   ```
+
+3. **Run tests**
+   To ensure everything is set up correctly, run the test suite:
+   ```
+   npm test
+   ```
+
+4. **Run the analyzer**
+   To analyze a directory, use the following command:
+   ```
+   npm run analyze /path/to/directory
+   ```
+   Replace `/path/to/directory` with the actual path you want to analyze.
+
+
+
 ### Key Features
 1. Recursive directory scanning
 2. File analysis (size, type, creation date)
