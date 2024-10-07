@@ -33,10 +33,10 @@ describe('analyzeDirectory function', () => {
         // expect(result.largestFiles.length).toBe(3); // Assuming you're tracking all files
         expect(result.largestFiles[0].size).toBe(5);
         expect(result.largestFiles[1].size).toBe(5);
-        // expect(result.largestFiles[2].size).toBe(4);
-        // expect(result.largestFiles.map(f => path.basename(f.path))).toEqual(
-        //     expect.arrayContaining(['file1.txt', 'file2.jpg', 'file3.txt'])
-        // );
+        expect(result.largestFiles[2].size).toBe(4);
+        expect(result.largestFiles.map(f => path.basename(f.path))).toEqual(
+            expect.arrayContaining(['file1.txt', 'file2.jpg', 'file3.txt'])
+        );
     });
 
     test('handles non-existent directory', async () => {
